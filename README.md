@@ -5,10 +5,12 @@ The app needs these packages to function properly:
  * Python 3
  * Nano text editor  
 You can install these packages via:
- * Debian-based distributions:
- ```sudo apt upgrade &&  sudo apt install python3 && sudo apt install kitty &&  sudo apt install nano```  
+ * Debian-based distributions:  
+ ```sudo apt upgrade && sudo apt install python3 && sudo apt install kitty &&  sudo apt install nano```  
  * Arch-based distributions:  
  ```sudo pacman -Syu && sudo pacman -S python && yay -S kitty #You can use paru if you have got paru AUR helper```  
+ Download the installer:  
+ ```curl -fsSL https://raw.githubusercontent.com/Mark1-codex/VaultTUI/main/installer.sh | sudo bash```    
  Run installer:  
  ```chmod +x installer.sh && ./installer.sh```  
  Then, run with:  
