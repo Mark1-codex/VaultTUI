@@ -18,6 +18,7 @@ try:
     home_dir_items = os.listdir(home_dir)
     currentchoice = 0
     start_view = 0
+    items_sorted = False
     helptoggled = False
 
     selection_mode = False
@@ -53,6 +54,8 @@ try:
                     start_view = currentchoice - max_visible + 1
 
                 items = home_dir_items[start_view: start_view + max_visible]
+                if items_sorted:
+                    items.sort()
                 display = []
                 for idx, i in enumerate(items):
                     actual_idx = start_view + idx
@@ -158,6 +161,11 @@ try:
 
     def exit(): sys.exit(0)
 
+    def sort_items():
+        global items_sorted
+        items_sorted = not items_sorted
+        upd()
+
     keyboard.add_hotkey("up", lambda: upd("up"))
     keyboard.add_hotkey("down", lambda: upd("down"))
     keyboard.add_hotkey("space", toggle_selection)
@@ -174,9 +182,10 @@ try:
     keyboard.add_hotkey("shift+h", viewreadme)
     keyboard.add_hotkey("shift+enter", lambda: upd())
     keyboard.add_hotkey("ctrl+q", exit)
+    keyboard.add_hotkey("ctrl+o", sort_items)
     os.system("clear")
     asciiart.printart()
-    print("Welcome to VaultTUI-v1.0!\nPress shift+enter to begin.")
+    print("Welcome to VaultTUI-v1.1!\nPress shift+enter to begin.")
     keyboard.wait()
 except KeyboardInterrupt:
     sys.exit(0)

@@ -28,5 +28,6 @@ Ctrl+R - Rename the selected file
 Ctrl+T - Open the terminal emulator (Ctrl+Q to exit)  
 Ctrl+C - Stop the app from running.  
 Ctrl+H - To display help   
-Ctrl+Q - To exit the app (or Ctrl+C but that is unrecommended)  
+Ctrl+Q - To exit the app (or Ctrl+C but that is unrecommended)    
+Ctrl+O - To sort the items  
 Shift+H - To view the README.md   
