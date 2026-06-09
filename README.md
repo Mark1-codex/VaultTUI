@@ -10,9 +10,7 @@ You can install these packages via:
  * Arch-based distributions:  
  ```sudo pacman -Syu && sudo pacman -S python && yay -S kitty #You can use paru if you have got paru AUR helper```  
  Download the installer:  
- ```curl -fsSL https://raw.githubusercontent.com/Mark1-codex/VaultTUI/main/installer.sh | sudo bash```    
- Run installer:  
- ```chmod +x installer.sh && ./installer.sh```  
+ ```curl -fsSL https://raw.githubusercontent.com/Mark1-codex/VaultTUI/main/installer.sh | sudo bash```  
  Then, run with:  
  ```vault```  
 ## Usage guide:
