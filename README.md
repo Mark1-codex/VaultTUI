@@ -9,10 +9,11 @@ You can install these packages via:
  ```sudo apt upgrade && sudo apt install python3 && sudo apt install kitty &&  sudo apt install nano```  
  * Arch-based distributions:  
  ```sudo pacman -Syu && sudo pacman -S python && yay -S kitty #You can use paru if you have got paru AUR helper```  
- Download the installer:  
+ Use the installer:  
  ```curl -fsSL https://raw.githubusercontent.com/Mark1-codex/VaultTUI/main/installer.sh | sudo bash```  
  Then, run with:  
  ```vault```  
+ IMPORTANT: because of syncing changes, running VaultTUI will not work the first time because of kitty's remote control settings, make sure to run again after running the first time!  
 ## Usage guide:
 Once you have successfully set up VaultTUI on your device, run it. Enter user password (required for the keyboard module). Congratulations on setting up VaultTUI!    
 Here are basic usage instructions:  
