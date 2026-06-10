@@ -1,6 +1,6 @@
 try:
     import os
-    import keyboard
+    from pynput import keyboard
     import threading
     import subprocess
     import sys
@@ -18,13 +18,13 @@ try:
     home_dir_items = os.listdir(home_dir)
     currentchoice = 0
     start_view = 0
-    items_sorted = False
     helptoggled = False
 
     selection_mode = False
     selected_items = []
 
     def upd(e=""):
+        os.system("clear")
         with ui_lock:
             global currentchoice, home_dir_items, start_view, helptoggled, selection_mode
 
@@ -54,8 +54,6 @@ try:
                     start_view = currentchoice - max_visible + 1
 
                 items = home_dir_items[start_view: start_view + max_visible]
-                if items_sorted:
-                    items.sort()
                 display = []
                 for idx, i in enumerate(items):
                     actual_idx = start_view + idx
@@ -157,36 +155,46 @@ try:
 
     def openterminal(): triggeraction("Terminal emulator", "termemulator.py")
 
-    def viewreadme(): os.system(f"nano {Path(__file__).parent / "README.md"}")
 
-    def exit(): sys.exit(0)
+    def viewreadme(): os.system(f"nano {Path(__file__).parent / 'README.md'}")
 
-    def sort_items():
-        global items_sorted
-        items_sorted = not items_sorted
+
+    def exit_app(): sys.exit(0)
+
+
+    def toggle_help():
+        global helptoggled
+        helptoggled = not helptoggled
         upd()
 
-    keyboard.add_hotkey("up", lambda: upd("up"))
-    keyboard.add_hotkey("down", lambda: upd("down"))
-    keyboard.add_hotkey("space", toggle_selection)
-    keyboard.add_hotkey("enter", lambda: godown("down"))
-    keyboard.add_hotkey("ctrl+enter", goup)
-    keyboard.add_hotkey("ctrl+d", deletefile)
-    keyboard.add_hotkey("ctrl+n", mkfile)
-    keyboard.add_hotkey("ctrl+s", copyfile)
-    keyboard.add_hotkey("ctrl+r", renamefile)
-    keyboard.add_hotkey("ctrl+m", movefile)
-    keyboard.add_hotkey("ctrl+f", findfiles)
-    keyboard.add_hotkey("ctrl+t", openterminal)
-    keyboard.add_hotkey("ctrl+h", lambda: exec("global helptoggled; helptoggled = not helptoggled; upd()"))
-    keyboard.add_hotkey("shift+h", viewreadme)
-    keyboard.add_hotkey("shift+enter", lambda: upd())
-    keyboard.add_hotkey("ctrl+q", exit)
-    keyboard.add_hotkey("ctrl+o", sort_items)
+
+    # Define hotkey handlers (some wrapped for compatibility)
+    hotkeys = {
+        '<up>': lambda: upd("up"),
+        '<down>': lambda: upd("down"),
+        '<space>': toggle_selection,
+        '<enter>': lambda: godown(None),  # e param not really used
+        '<ctrl>+<enter>': goup,
+        '<ctrl>+d': deletefile,
+        '<ctrl>+n': mkfile,
+        '<ctrl>+s': copyfile,
+        '<ctrl>+r': renamefile,
+        '<ctrl>+m': movefile,
+        '<ctrl>+f': findfiles,
+        '<ctrl>+t': openterminal,
+        '<ctrl>+h': toggle_help,
+        '<shift>+h': viewreadme,
+        '<shift>+<enter>': lambda: upd(),
+        '<ctrl>+q': exit_app,
+    }
+
     os.system("clear")
     asciiart.printart()
-    print("Welcome to VaultTUI-v1.1!\nPress shift+enter to begin.")
-    keyboard.wait()
+    print("Welcome to VaultTUI-v1.2!\nPress shift+enter to begin.")
+
+    with keyboard.GlobalHotKeys(hotkeys) as listener:
+        listener.join()
+
 except KeyboardInterrupt:
     sys.exit(0)
 except Exception as e:

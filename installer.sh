@@ -20,7 +20,7 @@ git clone "$REPO_URL" "$INSTALL_DIR"
 echo "Setting up virtual environment..."
 python3 -m venv "$INSTALL_DIR/.venv"
 "$INSTALL_DIR/.venv/bin/pip" install --upgrade pip
-"$INSTALL_DIR/.venv/bin/pip" install keyboard rich
+"$INSTALL_DIR/.venv/bin/pip" install pynput rich
 
 # 3. Create the executable launcher
 echo "Creating launcher at $BIN_PATH..."
